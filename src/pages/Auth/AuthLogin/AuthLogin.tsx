@@ -12,7 +12,13 @@ const AuthLogin = () => {
     const [checked, setChecked] = useState(false);
 
     const isFormValid = () => {
-        return email.trim() !== "" && password.trim() !== "" && checked && isEmailValid();
+        return (
+            email.trim() !== "" &&
+            password.trim() !== "" &&
+            password.length >= 7 &&
+            checked &&
+            isEmailValid()
+        );
     };
 
     const isEmailValid = () => {
@@ -36,7 +42,6 @@ const AuthLogin = () => {
         if (!isFormValid()) {
             return;
         }
-
         const url = 'https://api.themoviedb.org/3/authentication/guest_session/new';
         const headers = {
             Authorization:
@@ -47,7 +52,6 @@ const AuthLogin = () => {
         try {
             const response = await axios.get(url, { headers });
             const token = response.data.guest_session_id;
-
             localStorage.setItem('guest_token', token);
             console.log("Guest Session:", response.data);
             navigate("/movies");

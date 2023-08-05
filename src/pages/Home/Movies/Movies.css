@@ -30,3 +30,11 @@
     color: #ccc;
     font-size: 14px;
 }
+
+.topic-container {
+    background-color: #03067B;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px;
+}
