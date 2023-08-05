@@ -5,3 +5,28 @@
 .container {
     background: #03067B;
 }
+
+.movie-container {
+    position: relative;
+}
+
+.movie-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    color: white;
+    display: none;
+}
+
+.movie-container:hover .movie-details {
+    display: block;
+}
+
+.genres {
+    margin-top: 5px;
+    color: #ccc;
+    font-size: 14px;
+}

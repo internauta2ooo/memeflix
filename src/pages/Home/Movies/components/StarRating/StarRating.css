@@ -1,0 +1,12 @@
+.star-rating {
+    font-size: 24px;
+}
+
+.fas.fa-star.filled,
+.fas.fa-star-half-alt.half-filled {
+    color: gold;
+}
+
+.far.fa-star.empty {
+    color: #ccc;
+}
