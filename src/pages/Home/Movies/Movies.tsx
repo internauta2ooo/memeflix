@@ -11,10 +11,10 @@ const Movies = () => {
     const [activeTopic, setActiveTopic] = useState<string>('NowPlaying')
     const [movies, setMovies] = useState<{ [key: string]: any }[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const urlNowPlaying = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${currentPage}`
-    const urlPopular = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${currentPage}`
-    const urlTopRated = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${currentPage}`
-    const urlUpcoming = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${currentPage}`
+    const urlNowPlaying = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=`
+    const urlPopular = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=`
+    const urlTopRated = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=`
+    const urlUpcoming = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=`
     const [topic, setTopic] = useState<any>(urlNowPlaying);
     const [totalPages, setTotalPages] = useState(0);
     const fetchData = useCallback(async () => {
@@ -25,7 +25,7 @@ const Movies = () => {
         };
 
         try {
-            const response = await axios.get(topic, { headers });
+            const response = await axios.get(`${topic}${currentPage}`, { headers });
             const moviePromises: Promise<any>[] = response.data.results.map((movieItem: any, key: any) => {
                 const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieItem.id}?language=en-US`;
                 return axios.get(movieDetailsUrl, { headers });
@@ -46,9 +46,10 @@ const Movies = () => {
         } catch (error) {
             console.error('Error al obtener datos:', error);
         }
-    }, [topic]);
+    }, [topic, currentPage]);
     useEffect(() => {
         fetchData();
+
     }, [currentPage, topic, fetchData]);
 
     const handlePageChange = (page: number) => {
@@ -130,6 +131,7 @@ const Movies = () => {
                     ))}
                 </Row>
                 <Pagination
+                    setCurrentPage={setCurrentPage}
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}

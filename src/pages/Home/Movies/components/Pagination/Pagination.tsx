@@ -1,8 +1,9 @@
 import { Button } from "antd";
 import './Pagination.css'
-const Pagination = ({ currentPage, totalPages, onPageChange }: any) => {
+const Pagination = ({ setCurrentPage, currentPage, totalPages, onPageChange }: any) => {
     const handlePreviousPage = () => {
         onPageChange(currentPage - 1);
+
     };
 
     const handleNextPage = () => {
